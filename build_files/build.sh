@@ -13,7 +13,7 @@ set -ouex pipefail
 dnf5 install -y fish tmux neovim pass
 dnf5 install -y pam-u2f pamu2fcfg pamtester
 # nope
-dnf5 remove -y firefox
+dnf5 remove -y firefox nano
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
