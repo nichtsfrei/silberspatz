@@ -13,7 +13,7 @@ set -ouex pipefail
 dnf5 install -y fish tmux neovim
 dnf5 install -y pass
 # maybe akready ibstalled?
-dnf5 install -y pam-u2f pamu2fcfg
+dnf5 install -y pam-u2f pamu2fcfg pamtester
 
 # Use a COPR Example:
 #
