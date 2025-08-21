@@ -1,3 +1,9 @@
+# TODO
+- create update script similiar to ujust update
+- create timer for system and flatpak updates
+- remove ublue batteries (too many dnf repos for my taste)
+- install nerdfont 
+- create default nvim configuration
 # image-template
 
 This repository is meant to be a template for building your own custom [bootc](https://github.com/bootc-dev/bootc) image. This template is the recommended way to make customizations to any image published by the Universal Blue Project.

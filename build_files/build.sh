@@ -12,6 +12,7 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 install -y fish tmux neovim pass
 dnf5 install -y pam-u2f pamu2fcfg pamtester
+dnf5 install -y setroubleshoot
 # nope
 dnf5 remove -y firefox nano
 # Use a COPR Example:
