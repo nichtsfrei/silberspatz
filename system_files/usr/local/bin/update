@@ -1,0 +1,11 @@
+#!/bin/sh
+
+rpm-ostree update
+flatpak update -y
+distrobox upgrade -a
+
+#rpm-ostree db diff --changelogs
+
+# fwupdmgr refresh --force
+# fwupdmgr get-updates
+# fwupdmgr update
