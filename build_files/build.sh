@@ -10,7 +10,8 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y fish tmux neovim pass
+dnf5 install -y @gnome-desktop flatpak
+dnf5 install -y fish tmux neovim distrobox
 dnf5 install -y pam-u2f pamu2fcfg pamtester
 dnf5 install -y setroubleshoot
 # nope
