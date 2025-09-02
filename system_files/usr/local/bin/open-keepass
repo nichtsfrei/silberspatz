@@ -1,0 +1,3 @@
+#!/bin/sh
+
+secret-tool lookup keepass keepass | flatpak run org.keepassxc.KeePassXC --pw-stdin --keyfile $HOME/Documents/key $HOME/Documents/Nextcloud/Passwords.kdbx
