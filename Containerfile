@@ -4,8 +4,7 @@ COPY build_files /
 
 # Base Image
 #FROM ghcr.io/ublue-os/silverblue-main:latest
-FROM quay.io/fedora-ostree-desktops/atomic-cosmic:43
-#FROM quay.io/fedora-ostree-desktops/silverblue:43
+FROM quay.io/fedora-ostree-desktops/silverblue:43
  
 # ... and so on, here are more base images
 # Universal Blue Images: https://github.com/orgs/ublue-os/packages
