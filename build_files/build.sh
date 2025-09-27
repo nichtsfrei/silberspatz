@@ -16,7 +16,6 @@ dnf5 install -y fish tmux neovim distrobox \
 	setroubleshoot \
 	@virtualization \
 	niri
-# nope
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
