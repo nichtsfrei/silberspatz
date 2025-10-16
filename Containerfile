@@ -7,7 +7,7 @@ RUN cargo install kanata
 
 # Base Image
 #FROM ghcr.io/ublue-os/silverblue-main:latest
-FROM quay.io/fedora-ostree-desktops/silverblue:43
+FROM quay.io/fedora-ostree-desktops/silverblue:42
 # FROM quay.io/fedora-ostree-desktops/cosmic-atomic:43
  
 COPY system_files/ /
