@@ -8,7 +8,7 @@ dnf5 install -y --setopt=install_weak_deps=False \
 	foot \
 	swaylock \
 	swayidle \
-	cosmic-launcher \
+	fuzzel \
 	waybar
 
 dnf5 install -y fish tmux neovim distrobox \

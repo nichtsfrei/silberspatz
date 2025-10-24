@@ -37,12 +37,15 @@
     },
     "custom/osk-toggle": {
       "format": "",
-      "on-click": "sh $HOME/.config/scripts/toggle-osk.sh"
+      "on-click": "toggle-osk"
     },
     
+    //TODO: create a menu for scalling monitor
+    // The idea is to have a script that checks how many monitor are there and present multiple scale options
     "custom/multimedia-menu": {
       "format": "",
-      "on-click": "sh $HOME/.config/waybar/subbars/spawn-wb.sh multimedia"
+      // TODO: create a menu for signal, element, telegram, librewolf, e-mail
+      "on-click": "flatpak run io.gitlab.librewolf-community"
     },
 
     "custom/terminal": {
