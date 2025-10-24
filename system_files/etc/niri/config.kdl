@@ -26,7 +26,7 @@ input {
         // dwt
         // dwtp
         natural-scroll
-        accel-speed 2.0
+        // accel-speed 2.0
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse

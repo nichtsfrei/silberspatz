@@ -8,7 +8,8 @@ dnf5 install -y --setopt=install_weak_deps=False \
 	foot \
 	swaylock \
 	swayidle \
-	cosmic-app-library
+	cosmic-launcher \
+	waybar
 
 dnf5 install -y fish tmux neovim distrobox \
 	NetworkManager-tui \
