@@ -75,7 +75,6 @@
         "disk",
         "network",
         "pulseaudio",
-        "pulseaudio#microphone",
         "custom/power-menu",
         "custom/brightness-menu",
         "custom/niri-rotate",
@@ -156,32 +155,34 @@
       "custom/niri-right",
     ],
     "network": {
-      "format": "  {ifname}",
-      "format-alt": "  {bandwidthUpBytes}    {bandwidthDownBytes}",
-      "format-disconnected": "󰅛 Disconnected",
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected ⚠",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}",
       "on-click": "foot -c 'nmtui'",
-      "interval": 1,
-      "tooltip": false
     },
     "position": "bottom",
+
     "pulseaudio": {
-      "format": "{icon} {volume}%",
-      "format-icons": {
-        "default": [
-          "",
-          "",
-          "󱄠"
-        ]
-      },
-      "format-muted": "󰸈 0%",
-      "on-click": "flatpak run org.pulseaudio.pavucontrol",
-      "tooltip": false
-    },
-    "pulseaudio#microphone": {
-      "format": "{format_source}",
-      "format-source": "󰍬 {volume}%",
-      "format-source-muted": "󰍭 0%",
-      "on-click": "flatpak run org.pulseaudio.pavucontrol",
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "flatpak run org.pulseaudio.pavucontrol",
     },
     "tray": {
       "icon-size": 12,
