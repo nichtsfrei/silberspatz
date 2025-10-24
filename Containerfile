@@ -8,7 +8,7 @@ RUN cargo install kanata
 # Base Image
 #FROM ghcr.io/ublue-os/silverblue-main:latest
 # FROM quay.io/fedora-ostree-desktops/kinoite:43
-FROM quay.io/fedora-ostree-desktops/base-atomic:43
+FROM quay.io/fedora-ostree-desktops/base-atomic:42
  
 COPY system_files/ /
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata 

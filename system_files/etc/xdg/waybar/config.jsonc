@@ -1,0 +1,191 @@
+[
+  {
+    "clock": {
+      "format": "{:%a %F %R}",
+      "interval": 1,
+      "tooltip": true,
+      "tooltip-format": "<tt>{calendar}</tt>"
+    },
+    "cpu": {
+      "format": " {usage}%",
+      "interval": 1
+    },
+    "disk": {
+      "format": "󰋊 {percentage_used}%",
+      "path": "/home"
+    },
+    "custom/battery": {
+      "format": "{}",
+      "exec": "sh /etc/xdg/waybar/bat.sh",
+      "interval": 5
+    },
+    "custom/niri-left": {
+      "format": "\uea9b",
+      "on-click": "niri msg action focus-column-left"
+    },
+    "custom/niri-right": {
+       "format": "\uea9c",
+      "on-click": "niri msg action focus-column-right"
+    },
+    "custom/niri-rotate": {
+      "format": "󰢆",
+      "on-click": "sh /etc/xdg/waybar/niri-transform.sh"
+    },
+    "custom/niri-maximixe": {
+      "format": "",
+      "on-click": "niri msg action maximize-column"
+    },
+    "custom/osk-toggle": {
+      "format": "",
+      "on-click": "sh $HOME/.config/scripts/toggle-osk.sh"
+    },
+    
+    "custom/multimedia-menu": {
+      "format": "",
+      "on-click": "sh $HOME/.config/waybar/subbars/spawn-wb.sh multimedia"
+    },
+
+    "custom/terminal": {
+      "format": "\uf120",
+      "on-click": "foot"
+    },
+    "custom/brightness-menu": {
+      "format": "󰃟",
+      "tooltip": false,
+      "menu": "on-click",
+      "menu-file": "/etc/xdg/waybar/subbars/display-brightness.xml", // Menu file in resources folder
+      "menu-actions": {
+          "1": "brightnessctl s 1%",
+          "25": "brightnessctl s 25%",
+          "50": "brightnessctl s 50%",
+          "75": "brightnessctl s 75%",
+          "100": "brightnessctl s 100%",
+      }
+    },
+    "group/system": {
+      "orientation": "inherit",
+      "drawer": {
+        "click-to-reveal": true,
+        "transition-left-to-right": false,
+      },
+      "modules": [
+        "custom/system-label",
+        "cpu",
+        "memory",
+        "disk",
+        "network",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "custom/power-menu",
+        "custom/brightness-menu",
+        "custom/niri-rotate",
+      ]
+
+    },
+    "custom/system-label": {
+        "format": "󰐥",
+        "tooltip": false,
+    },
+    "custom/power-menu": {
+          "format": "󰐥",
+          "tooltip": false,
+          "menu": "on-click",
+          "menu-file": "/etc/xdg/waybar/subbars/power.xml",
+          "menu-actions": {
+              "suspend": "swaylock & systemctl suspend",
+              "shutdown": "systemctl poweroff",
+              "reboot": "systemctl reboot",
+          }
+    },
+    "group/bluetooth": {
+      "orientation": "inherit",
+      "drawer": {
+        "click-to-reveal": true,
+        "transition-left-to-right": true,
+      },
+      "modules": [
+        "custom/bluetooth-label",
+        "custom/tbtsoe",
+      ]
+
+    },
+    "custom/bluetooth-label": {
+        "format": "󰂱",
+        "tooltip": false,
+    },
+    "custom/tbtsoe": {
+      "format": "♯",
+      "on-click": "toggle-bluetooth-connect 80:99:E7:E4:3C:87"
+    },
+    "niri/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+    "layer": "top",
+    "memory": {
+      "format": "󰨅 {percentage}%",
+      "interval": 1,
+      "states": {
+        "warning": 85
+      }
+    },
+    "modules-center": [
+      "custom/terminal",
+      "custom/niri-maximixe",
+      "clock",
+      "custom/osk-toggle",
+      "idle_inhibitor",
+    ],
+    "modules-left": [
+      "custom/niri-left",
+      "niri/workspaces",
+      "custom/multimedia-menu",
+      "group/bluetooth",
+    ],
+    "modules-right": [
+      "group/system",
+      "tray",
+      "custom/battery",
+      "custom/niri-right",
+    ],
+    "network": {
+      "format": "  {ifname}",
+      "format-alt": "  {bandwidthUpBytes}    {bandwidthDownBytes}",
+      "format-disconnected": "󰅛 Disconnected",
+      "on-click": "foot -c 'nmtui'",
+      "interval": 1,
+      "tooltip": false
+    },
+    "position": "bottom",
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-icons": {
+        "default": [
+          "",
+          "",
+          "󱄠"
+        ]
+      },
+      "format-muted": "󰸈 0%",
+      "on-click": "flatpak run org.pulseaudio.pavucontrol",
+      "tooltip": false
+    },
+    "pulseaudio#microphone": {
+      "format": "{format_source}",
+      "format-source": "󰍬 {volume}%",
+      "format-source-muted": "󰍭 0%",
+      "on-click": "flatpak run org.pulseaudio.pavucontrol",
+    },
+    "tray": {
+      "icon-size": 12,
+      "spacing": 8
+    }
+  }
+]
