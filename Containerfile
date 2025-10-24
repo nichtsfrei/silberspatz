@@ -9,6 +9,8 @@ RUN cargo install kanata
 #FROM ghcr.io/ublue-os/silverblue-main:latest
 # FROM quay.io/fedora-ostree-desktops/kinoite:43
 FROM quay.io/fedora-ostree-desktops/base-atomic:42
+ARG VARIANT="latest"
+ENV VARIANT=${VARIANT}
  
 COPY system_files/ /
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata 
@@ -17,7 +19,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build.sh && \
+    VARIANT=$VARIANT /ctx/build.sh && \
     ostree container commit
     
 ### LINTING
