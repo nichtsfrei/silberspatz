@@ -83,7 +83,7 @@ jobs:
           # This generates all the tags for your image, you can add custom tags here too!
           # Default tags are "$${{ matrix.variant }}" and "$${{ matrix.variant }}.$date".
           build-args: |
-            variant=${{ matrix.variant }}
+            VARIANT=${{ matrix.variant }}
           tags: |
             type=raw,value=${{ matrix.variant }}
             type=raw,value=${{ matrix.variant }}.{{date 'YYYYMMDD'}}
