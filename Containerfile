@@ -39,21 +39,6 @@ RUN --mount=type=cache,dst=/var/cache \
     dnf5 -y config-manager setopt "*fedora*".exclude="mesa-* kernel-core-* kernel-modules-* kernel-uki-virt-*" && \
     /ctx/cleanup
 
-# Install kernel
-RUN --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=akmods,src=/rpms,dst=/tmp/akmods-rpms \
-    --mount=type=bind,from=akmods-extra,src=/rpms,dst=/tmp/akmods-extra-rpms \
-    --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/install-kernel-akmods && \
-    dnf5 -y copr enable bieszczaders/kernel-cachyos-addons && \
-    dnf5 -y install \
-        scx-scheds && \
-    dnf5 -y copr disable bieszczaders/kernel-cachyos-addons && \
-    /ctx/cleanup
-
 # Setup firmware
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
