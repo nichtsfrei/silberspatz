@@ -37,7 +37,6 @@ RUN --mount=type=cache,dst=/var/cache \
         dnf5 -y config-manager setopt copr:copr.fedorainfracloud.org:${copr////:}.priority=98 ;\
     done && unset -v copr && \
     dnf5 -y config-manager setopt "*bazzite*".priority=1 && \
-    dnf5 -y config-manager setopt "*fedora*".exclude="mesa-* kernel-core-* kernel-modules-* kernel-uki-virt-*" && \
     /ctx/cleanup
 
 # Setup firmware
