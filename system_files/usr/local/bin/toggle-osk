@@ -1,6 +1,6 @@
 #!/bin/sh
 
-(squeek-board > $XDG_RUNTIME_DIR/osk.log 2>&1 || true) &
+(squeekboard > $XDG_RUNTIME_DIR/osk.log 2>&1 || true) &
 STATE_FILE="$XDG_RUNTIME_DIR/osk_visible_state"
 
 if [ ! -f "$STATE_FILE" ]; then
