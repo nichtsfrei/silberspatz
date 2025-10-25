@@ -82,8 +82,6 @@ jobs:
         with:
           # This generates all the tags for your image, you can add custom tags here too!
           # Default tags are "$${{ matrix.variant }}" and "$${{ matrix.variant }}.$date".
-          build-args: |
-            VARIANT=${{ matrix.variant }}
           tags: |
             type=raw,value=${{ matrix.variant }}
             type=raw,value=${{ matrix.variant }}.{{date 'YYYYMMDD'}}
@@ -120,6 +118,8 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args: |
+            VARIANT=${{ matrix.variant }}
           oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
