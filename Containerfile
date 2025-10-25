@@ -1,5 +1,6 @@
 # Allow build scripts to be referenced without being copied into the final image
 ARG FEDORA_VERSION="${FEDORA_VERSION:-42}"
+ARG VARIANT="latest"
 
 FROM ghcr.io/ublue-os/akmods:bazzite-${FEDORA_VERSION} AS akmods
 FROM ghcr.io/ublue-os/akmods-extra:bazzite-${FEDORA_VERSION} AS akmods-extra
