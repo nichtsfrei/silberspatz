@@ -164,7 +164,7 @@
       "format-linked": "{ifname} (No IP) ",
       "format-disconnected": "Disconnected ⚠",
       "format-alt": "{ifname}: {ipaddr}/{cidr}",
-      "on-click": "foot -c 'nmtui'",
+      "on-click": "foot 'nmtui'",
     },
     "position": "bottom",
 
