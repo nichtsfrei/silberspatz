@@ -23,6 +23,7 @@ RUN dnf5 -y remove \
     cockpit-storaged \
     stress-ng \
     nautilus-gsconnect \
+    gnome-shell-extension-blur-my-shell \
     gnome-shell-extension-restart-to \
     gnome-shell-extension-hotedge \
     gnome-shell-extension-appindicator \
