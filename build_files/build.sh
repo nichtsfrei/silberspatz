@@ -22,4 +22,3 @@ dnf5 install -y \
 
 
 dnf5 remove -y firefox nano toolbox
-
