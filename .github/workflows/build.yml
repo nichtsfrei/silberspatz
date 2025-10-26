@@ -31,7 +31,9 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        variant: [latest, deck]
+         container:
+          - { path: "Containerfile", tag: "latest" }
+          - { path: "gaming.Containerfile", tag: "deck" }
 
 
     permissions:
@@ -40,7 +42,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Prepare environment
+      - name: Prepare environment ${{ matrix.container.tag }}
         run: |
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
@@ -81,10 +83,10 @@ jobs:
         id: metadata
         with:
           # This generates all the tags for your image, you can add custom tags here too!
-          # Default tags are "$${{ matrix.variant }}" and "$${{ matrix.variant }}.$date".
+          # Default tags are "$${{ matrix.container.tag }}" and "$${{ matrix.variant }}.$date".
           tags: |
-            type=raw,value=${{ matrix.variant }}
-            type=raw,value=${{ matrix.variant }}.{{date 'YYYYMMDD'}}
+            type=raw,value=${{ matrix.container.tag }}
+            type=raw,value=${{ matrix.container.tag }}.{{date 'YYYYMMDD'}}
             type=raw,value={{date 'YYYYMMDD'}}
             type=sha,enable=${{ github.event_name == 'pull_request' }}
             type=ref,event=pr
@@ -93,11 +95,11 @@ jobs:
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
             org.opencontainers.image.description=${{ env.IMAGE_DESC }}
             org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/refs/heads/main/README.md
-            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/blob/main/Containerfile
+            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/blob/main/${{ matrix.container.path }}
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
             org.opencontainers.image.vendor=${{ github.repository_owner }}
-            org.opencontainers.image.version=${{ matrix.variant }}.{{date 'YYYYMMDD'}}
+            org.opencontainers.image.version=${{ matrix.container.tag }}.{{date 'YYYYMMDD'}}
             io.artifacthub.package.deprecated=false
             io.artifacthub.package.keywords=${{ env.IMAGE_KEYWORDS }}
             io.artifacthub.package.license=Apache-2.0
@@ -112,14 +114,14 @@ jobs:
         uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
         with:
           containerfiles: |
-            ./Containerfile
+            ./${{ matrix.container.path }}
           # Postfix image name with -custom to make it a little more descriptive
           # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           build-args: |
-            VARIANT=${{ matrix.variant }}
+            VARIANT=${{ matrix.container.tag }}
           oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
@@ -131,8 +133,8 @@ jobs:
       #   uses: hhd-dev/rechunk@f153348d8100c1f504dec435460a0d7baf11a9d2 # v1.1.1
       #   with:
       #     rechunk: 'ghcr.io/hhd-dev/rechunk:v1.0.1'
-      #     ref: "localhost/${{ env.IMAGE_NAME }}:${{ matrix.variant }}"
-      #     prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.variant }}"
+      #     ref: "localhost/${{ env.IMAGE_NAME }}:${{ matrix.container.tag }}"
+      #     prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.container.tag }}"
       #     skip_compression: true
       #     version: ${{ env.CENTOS_VERSION }}
       #     labels: ${{ steps.metadata.outputs.labels }} # Rechunk strips out all the labels during build, this needs to be reapplied here with newline separator
