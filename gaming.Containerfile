@@ -47,6 +47,7 @@ RUN dnf5 -y install \
 
 RUN rm -rf \
     /bin/yafti-go /usr/libexec/bazzite-yafti-launcher \
+    /usr/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com \
     /usr/bin/ujust-picker /usr/share/ublue-os/just \
     /usr/share/ublue-os/bazaar \
     /usr/share/ublue-os/justfile 

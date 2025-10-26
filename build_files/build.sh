@@ -9,7 +9,11 @@ dnf5 install -y fish tmux neovim distrobox \
 	qemu-kvm \
 	brightnessctl \
 	btop \
+	ripgrep \
+	fzf \
 	flatpak
+
+# TODO: install paperwm
 
 # try to get familiar with paperwm instead of tilingshell in bazzite
 # On a gaming machine there is gamescope, while on non gaming machines the extra CPU usage is insignificant
