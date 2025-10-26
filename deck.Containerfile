@@ -2,8 +2,7 @@
 FROM scratch AS ctx
 COPY build_files /
 
-#TODO: change so that I don't have to duplicate containerfile
-FROM ghcr.io/ublue-os/bazzite-gnome:stable
+FROM ghcr.io/ublue-os/bazzite-deck-gnome:stable
 
 COPY system_files/ /
 RUN dnf5 -y remove \

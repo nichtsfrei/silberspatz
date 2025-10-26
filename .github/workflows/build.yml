@@ -33,7 +33,8 @@ jobs:
       matrix:
          container:
           - { path: "Containerfile", tag: "latest" }
-          - { path: "gaming.Containerfile", tag: "deck" }
+          - { path: "deck.Containerfile", tag: "deck" }
+          - { path: "gaming.Containerfile", tag: "gaming" }
 
 
     permissions:
