@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sudo rpm-ostree kargs --delete=rootflags=subvol=root --append=rootflags=subvol=root,compress=zstd:1
