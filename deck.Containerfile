@@ -5,6 +5,8 @@ COPY build_files /
 FROM ghcr.io/ublue-os/bazzite-deck-gnome:stable
 
 COPY system_files/ /
+COPY system_files_desktop/ /
+COPY system_files_deck/ /
 
 #TODO: remove yafti-go from bazzite-desktop-silverblue
 
