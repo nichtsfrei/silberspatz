@@ -1,0 +1,14 @@
+# /etc/systemd/system/postgres.service
+[Unit]
+Description=Start PostgreSQL Container
+Requires=postgres-setup.service
+After=postgres-setup.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/podman start postgres
+ExecStop=/usr/bin/podman stop postgres
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

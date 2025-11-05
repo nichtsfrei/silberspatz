@@ -1,0 +1,30 @@
+[Unit]
+Description=Setup Postgres Podman environment
+Before=postgres.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/bash -c 'if ! podman volume inspect pgdata > /dev/null 2>&1; then 
+    echo "POSTGRES_PASSWORD=$(uuidgen)" > /etc/systemd/secrets/postgres_password;
+    echo "Created new password for postgres";
+fi'
+
+# Run the Podman commands as a non-root user (replace 'your_user' with the actual non-root user)
+User=podman
+Group=podman
+# Set the POSTGRES_PASSWORD from the environment file
+EnvironmentFile=/etc/systemd/secrets/postgres_password
+ExecStartPre=/usr/bin/podman volume create pgdata || true
+ExecStartPre=/usr/bin/podman network create postgres || true
+ExecStartPre=/usr/bin/podman pull docker.io/postgres:latest || true
+ExecStart=/usr/bin/podman rm -f postgres || true
+ExecStart=/usr/bin/podman create \
+    --name postgres \
+    --network postgres \
+    -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+    -e PGDATA=/var/lib/postgresql/18/docker \
+    -v pgdata:/var/lib/postgresql/18/docker \
+    docker.io/postgres
+
+[Install]
+WantedBy=multi-user.target

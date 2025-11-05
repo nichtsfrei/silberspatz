@@ -1,0 +1,26 @@
+[Unit]
+Description=Setup Passbolt Podman environment
+Before=passbolt.service
+
+[Service]
+User=podman
+Group=podman
+EnvironmentFile=/etc/systemd/secrets/postgres_password
+EnvironmentFile=/etc/systemd/secrets/passbolt
+ExecStartPre=/usr/bin/podman volume create passbolt_gpg || true
+ExecStartPre=/usr/bin/podman volume create passbolt_jwt || true
+ExecStart=/usr/bin/podman create --name passbolt \
+    --network postgres \
+    -e APP_FULL_BASE_URL="$APP_FULL_BASE_URL" \
+    -e DATASOURCES_DEFAULT_DRIVER="Cake\Database\Driver\Postgres" \
+    -e DATASOURCES_DEFAULT_ENCODING="utf8" \
+    -e DATASOURCES_DEFAULT_URL="postgres://postgres:$POSTGRES_PASSWORD@postgres:5432/postgres?schema=passbolt" \
+    -v passbolt_gpg:/etc/passbolt/gpg \
+    -v passbolt_jwt:/etc/passbolt/jwt \
+    -v /etc/passbolt/certificate.key:/etc/ssl/certs/certificate.key:Z,ro \
+    -v /etc/passbolt/certificate.crt:/etc/ssl/certs/certificate.crt:Z,ro \
+    -p 8443:443 \
+    docker.io/passbolt/passbolt:latest-ce
+
+[Install]
+WantedBy=multi-user.target

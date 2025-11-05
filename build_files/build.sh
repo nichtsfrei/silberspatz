@@ -20,5 +20,4 @@ dnf5 install -y fish tmux neovim distrobox \
 dnf5 install -y \
     gnome-shell-extension-caffeine
 
-
 dnf5 remove -y firefox nano toolbox

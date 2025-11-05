@@ -1,0 +1,14 @@
+# /etc/systemd/system/postgres.service
+[Unit]
+Description=Start Passbolt Container
+Requires=passbolt-setup.service
+After=passbolt-setup.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/podman start passbolt
+ExecStop=/usr/bin/podman stop passbolt
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

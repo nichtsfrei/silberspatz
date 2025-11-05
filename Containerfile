@@ -19,7 +19,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    VARIANT=$VARIANT /ctx/build.sh && \
+    /ctx/build.sh && \
     /ctx/finalize
 
 RUN bootc container lint
