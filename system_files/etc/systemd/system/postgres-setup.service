@@ -4,10 +4,7 @@ Before=postgres.service
 
 [Service]
 Type=oneshot
-ExecStartPre=/bin/bash -c 'if ! podman volume inspect pgdata > /dev/null 2>&1; then 
-    echo "POSTGRES_PASSWORD=$(uuidgen)" > /etc/systemd/secrets/postgres_password;
-    echo "Created new password for postgres";
-fi'
+ExecStartPre=/bin/bash -c '[ -f /etc/systemd/secrets/postgres_password ] || echo "POSTGRES_PASSWORD=$(uuidgen)" > /etc/systemd/secrets/postgres_password;'
 
 # Run the Podman commands as a non-root user (replace 'your_user' with the actual non-root user)
 User=podman
