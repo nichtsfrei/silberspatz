@@ -30,6 +30,7 @@ jobs:
     name: Build and push image
     runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
       matrix:
          container:
           - { path: "Containerfile", tag: "latest" }
