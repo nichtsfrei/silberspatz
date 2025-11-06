@@ -54,14 +54,14 @@ case "$session" in
     if [[ ${BASE_IMAGE_NAME} == 'kinoite' ]]; then
       session_launcher="plasma.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
-      session_launcher="gnome-wayland.desktop"
+      session_launcher="niri.desktop"
     fi
   ;;
   plasma-x11-persistent)
     if [[ ${BASE_IMAGE_NAME} == 'kinoite' ]]; then
       session_launcher="plasmax11.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
-      session_launcher="gnome-xorg.desktop"
+      session_launcher="niri.desktop"
     fi
   ;;
   desktop|plasma)
@@ -69,7 +69,7 @@ case "$session" in
       session_launcher="plasma-steamos-wayland-oneshot.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
       # To switch to another desktop I assume we need to change that and create an oneshot file
-      session_launcher="gnome-wayland-oneshot.desktop"
+      session_launcher="niri.desktop"
     fi
     create_sentinel=1
   ;;

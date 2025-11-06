@@ -2,6 +2,8 @@
 
 set -ouex pipefail
 
+dnf5 install -y --setopt=install_weak_deps=False niri 
+
 dnf5 install -y fish tmux neovim distrobox \
 	NetworkManager-tui \
 	pam-u2f pamu2fcfg pamtester \
@@ -11,6 +13,11 @@ dnf5 install -y fish tmux neovim distrobox \
 	btop \
 	ripgrep \
 	fzf \
+	waybar \
+	swaylock \
+	swayidle \
+	fuzzel \
+	foot \
 	flatpak
 
 # TODO: install paperwm
