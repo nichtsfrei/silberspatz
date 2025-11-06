@@ -1,0 +1,7 @@
+- create a project for a osk
+-- create a service that binds itself as a keyboard and waits for command
+-- create the frontend afterwards
+--- split frontend into two parts (left - right) instead of bulky in the middle
+
+- create a shell to be used for niri or another dm
+
