@@ -1,12 +1,31 @@
 # /etc/systemd/system/postgres.service
 [Unit]
-Description=Start PostgreSQL Container
-Requires=postgres-setup.service
-After=postgres-setup.service
+Description=PostgreSQL Container
+Requires=network-online.target
+After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/podman start postgres
+User=podman
+Group=podman
+RuntimeDirectory=postgres
+RuntimeDirectoryMode=0700
+ExecStartPre=/bin/sh -c '\
+    umask 077 && \
+    echo "POSTGRES_PASSWORD=$(cat ${CREDENTIALS_DIRECTORY}/postgres.cred)" > /run/postgres/postgres.env \
+'
+ExecStartPre=/bin/sh -c '/usr/bin/podman volume create pgdata || true'
+ExecStartPre=/bin/sh -c '/usr/bin/podman network create postgres || true'
+ExecStartPre=/bin/sh -c '/usr/bin/podman pull docker.io/postgres:latest || true'
+ExecStartPre=/bin/sh -c '/usr/bin/podman rm -f postgres || true'
+ExecStart=/usr/bin/podman run \
+    --rm \
+    --name postgres \
+    --network postgres \
+    --env-file /run/postgres/postgres.env \
+    -e PGDATA=/var/lib/postgresql/18/docker \
+    -v pgdata:/var/lib/postgresql/18/docker \
+    docker.io/postgres
 ExecStop=/usr/bin/podman stop postgres
 Restart=on-failure
 
