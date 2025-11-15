@@ -6,6 +6,30 @@ After=passbolt-setup.service
 
 [Service]
 Type=simple
+User=podman
+Group=podman
+LoadCredential=ppw:/etc/systemd/credentials/postgres.cred
+LoadCredential=pb_full_base_url:/etc/systemd/credentials/passbolt-full-base-url.cred
+ExecStartPre=/usr/bin/podman volume create passbolt_gpg || true
+ExecStartPre=/usr/bin/podman volume create passbolt_jwt || true
+ExecStartPre=/bin/sh -c '\
+    umask 077 && \
+    POSTGRES_PASSWORD="$(cat /run/credentials/%N/ppw)" \ 
+    echo "DATASOURCES_DEFAULT_URL=postgres://postgres:$POSTGRES_PASSWORD@postgres:5432/postgres?schema=passbolt" > /run/passbolt.env &&\
+    echo "DATASOURCES_DEFAULT_DRIVER=Cake\Database\Driver\Postgres" >> /run/passbolt.env &&\
+    echo "DATASOURCES_DEFAULT_ENCODING=utf8" >> /run/passbolt.env &&\
+    echo "APP_FULL_BASE_URL=$(cat /run/credentials/%N/pb_full_base_url)" >> /run/passbolt.env \
+'
+ExecStartPre=/usr/bin/podman create --name passbolt \
+    --replace \
+    --network postgres \
+    --env-file /run/passbolt.env \
+    -v passbolt_gpg:/etc/passbolt/gpg \
+    -v passbolt_jwt:/etc/passbolt/jwt \
+    -v /etc/passbolt/certificate.key:/etc/ssl/certs/certificate.key:Z,ro \
+    -v /etc/passbolt/certificate.crt:/etc/ssl/certs/certificate.crt:Z,ro \
+    -p 8443:443 \
+    docker.io/passbolt/passbolt:latest-ce
 ExecStart=/usr/bin/podman start passbolt
 ExecStop=/usr/bin/podman stop passbolt
 Restart=on-failure
