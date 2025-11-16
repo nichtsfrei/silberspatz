@@ -6,8 +6,6 @@ After=postgres.service
 
 [Service]
 Type=simple
-User=podman
-Group=podman
 
 LoadCredentialEncrypted=postgres.cred:/etc/systemd/credentials/postgres.cred
 LoadCredentialEncrypted=passbolt-full-base-url.cred:/etc/systemd/credentials/passbolt-full-base-url.cred

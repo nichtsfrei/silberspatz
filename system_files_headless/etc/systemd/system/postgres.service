@@ -1,8 +1,9 @@
 # /etc/systemd/system/postgres.service
 [Unit]
 Description=PostgreSQL Container
-Requires=network-online.target
+Wants=network-online.target
 After=network-online.target
+RequiresMountsFor=%t/containers
 
 [Service]
 Type=simple
@@ -10,6 +11,8 @@ User=podman
 Group=podman
 RuntimeDirectory=postgres
 RuntimeDirectoryMode=0700
+Environment=PODMAN_SYSTEMD_UNIT=%n
+LoadCredentialEncrypted=postgres.cred:/etc/systemd/credentials/postgres.cred
 ExecStartPre=/bin/sh -c '\
     umask 077 && \
     echo "POSTGRES_PASSWORD=$(cat ${CREDENTIALS_DIRECTORY}/postgres.cred)" > /run/postgres/postgres.env \
