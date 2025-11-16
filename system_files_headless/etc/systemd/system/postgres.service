@@ -19,7 +19,6 @@ ExecStartPre=/bin/sh -c '\
 '
 ExecStartPre=/bin/sh -c '/usr/bin/podman volume create pgdata || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman network create postgres || true'
-ExecStartPre=/bin/sh -c '/usr/bin/podman pull docker.io/postgres:latest || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman rm -f postgres || true'
 ExecStart=/usr/bin/podman run \
     --rm \

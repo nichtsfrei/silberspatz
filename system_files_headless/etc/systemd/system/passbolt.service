@@ -6,11 +6,13 @@ After=postgres.service
 
 [Service]
 Type=simple
-
-LoadCredentialEncrypted=postgres.cred:/etc/systemd/credentials/postgres.cred
-LoadCredentialEncrypted=passbolt-full-base-url.cred:/etc/systemd/credentials/passbolt-full-base-url.cred
+User=podman
+Group=podman
+Environment=PODMAN_SYSTEMD_UNIT=%n
 RuntimeDirectory=passbolt
 RuntimeDirectoryMode=0700
+LoadCredentialEncrypted=postgres.cred:/etc/systemd/credentials/postgres.cred
+LoadCredentialEncrypted=passbolt-full-base-url.cred:/etc/systemd/credentials/passbolt-full-base-url.cred
 ExecStartPre=/bin/sh -c '\
     umask 077 && \
     POSTGRES_PASSWORD="$(cat ${CREDENTIALS_DIRECTORY}/postgres.cred)" \
@@ -21,7 +23,6 @@ ExecStartPre=/bin/sh -c '\
 '
 ExecStartPre=/bin/sh -c '/usr/bin/podman volume create passbolt_gpg || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman volume create passbolt_jwt || true'
-ExecStartPre=/bin/sh -c '/usr/bin/podman pull docker.io/passbolt/passbolt:latest-ce || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman rm -f passbolt || true'
 ExecStartStart=/usr/bin/podman run --name passbolt \
     --rm \
