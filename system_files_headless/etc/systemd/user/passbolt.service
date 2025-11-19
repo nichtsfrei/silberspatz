@@ -6,8 +6,6 @@ After=postgres.service
 
 [Service]
 Type=simple
-User=podman
-Group=podman
 Environment=PODMAN_SYSTEMD_UNIT=%n
 RuntimeDirectory=passbolt
 RuntimeDirectoryMode=0700
@@ -15,8 +13,7 @@ LoadCredentialEncrypted=postgres.cred:/etc/systemd/credentials/postgres.cred
 LoadCredentialEncrypted=passbolt-full-base-url.cred:/etc/systemd/credentials/passbolt-full-base-url.cred
 ExecStartPre=/bin/sh -c '\
     umask 077 && \
-    POSTGRES_PASSWORD="$(cat ${CREDENTIALS_DIRECTORY}/postgres.cred)" \
-    echo "DATASOURCES_DEFAULT_URL=postgres://postgres:$POSTGRES_PASSWORD@postgres:5432/postgres?schema=passbolt" > /run/passbolt/passbolt.env &&\
+    echo "DATASOURCES_DEFAULT_URL=postgres://postgres:$(cat ${CREDENTIALS_DIRECTORY}/postgres.cred)@postgres:5432/postgres?schema=passbolt" > /run/passbolt/passbolt.env &&\
     echo "DATASOURCES_DEFAULT_DRIVER=Cake\Database\Driver\Postgres" >> /run/passbolt/passbolt.env &&\
     echo "DATASOURCES_DEFAULT_ENCODING=utf8" >> /run/passbolt/passbolt.env &&\
     echo "APP_FULL_BASE_URL=$(cat ${CREDENTIALS_DIRECTORY}/passbolt-full-base-url.cred)" >> /run/passbolt/passbolt.env \
@@ -24,7 +21,7 @@ ExecStartPre=/bin/sh -c '\
 ExecStartPre=/bin/sh -c '/usr/bin/podman volume create passbolt_gpg || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman volume create passbolt_jwt || true'
 ExecStartPre=/bin/sh -c '/usr/bin/podman rm -f passbolt || true'
-ExecStartStart=/usr/bin/podman run --name passbolt \
+ExecStart=/usr/bin/podman run --name passbolt \
     --rm \
     --network postgres \
     --env-file /run/passbolt/passbolt.env \

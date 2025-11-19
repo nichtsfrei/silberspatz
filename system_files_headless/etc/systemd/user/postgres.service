@@ -7,8 +7,6 @@ RequiresMountsFor=%t/containers
 
 [Service]
 Type=simple
-User=podman
-Group=podman
 RuntimeDirectory=postgres
 RuntimeDirectoryMode=0700
 Environment=PODMAN_SYSTEMD_UNIT=%n
