@@ -6,8 +6,8 @@ After=postgres.service
 
 [Service]
 Type=simple
-User=podman
-Group=podman
+User=philipp
+Group=philipp
 Environment=PODMAN_SYSTEMD_UNIT=%n
 RuntimeDirectory=passbolt
 RuntimeDirectoryMode=0700
