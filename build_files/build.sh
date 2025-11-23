@@ -2,7 +2,8 @@
 
 set -ouex pipefail
 
-# dnf5 install -y --setopt=install_weak_deps=False niri 
+dnf5 install -y --setopt=install_weak_deps=False \
+    niri
 
 dnf5 install -y fish tmux neovim distrobox \
 	NetworkManager-tui \
@@ -13,7 +14,11 @@ dnf5 install -y fish tmux neovim distrobox \
 	btop \
 	ripgrep \
 	fzf \
-	flatpak
+	flatpak \
+	foot \
+	fuzzel \
+	swaylock \
+	waybar 
 
 # try to get familiar with paperwm instead of tilingshell in bazzite
 # On a gaming machine there is gamescope, while on non gaming machines the extra CPU usage is insignificant

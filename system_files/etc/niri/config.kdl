@@ -209,7 +209,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 spawn-at-startup "waybar"
-spawn-at-startup "squeekboard"
+// spawn-at-startup "squeekboard"
 // Unfortunately this is still needed for some applications
 // spawn-at-startup "xwayland-satellite"
 environment {
