@@ -17,8 +17,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	flatpak \
 	foot \
 	fuzzel \
-	swaylock \
-	waybar 
+	swaylock
 
 # try to get familiar with paperwm instead of tilingshell in bazzite
 # On a gaming machine there is gamescope, while on non gaming machines the extra CPU usage is insignificant
