@@ -18,11 +18,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	foot \
 	fuzzel \
 	gtk4-layer-shell \
-	swaylock
-
-# try to get familiar with paperwm instead of tilingshell in bazzite
-# On a gaming machine there is gamescope, while on non gaming machines the extra CPU usage is insignificant
-dnf5 install -y \
-    gnome-shell-extension-caffeine
+	swaylock \
+	waybar
 
 dnf5 remove -y firefox nano toolbox

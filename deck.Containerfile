@@ -16,14 +16,11 @@ RUN apt update && apt install -y \
 RUN cargo build --release
 RUN cp target/release/onscreenski /install/
 
-
 FROM ghcr.io/ublue-os/bazzite-deck-gnome:stable
 
 COPY system_files/ /
 COPY system_files_desktop/ /
 COPY system_files_deck/ /
-
-#TODO: remove yafti-go from bazzite-desktop-silverblue
 
 COPY --from=kanata /install/ukeynski /usr/local/bin/ukeynski
 COPY --from=kanata /install/onscreenski /usr/local/bin/onscreenski
