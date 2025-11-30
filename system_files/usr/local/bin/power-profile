@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+case "$1" in
+    balanced|power-saver|performance)
+        ;;
+    *)
+        echo "Invalid mode: $1. Valid options are balanced, power-saver, or performance."
+        exit 1
+        ;;
+esac
+
+set -e
+
+gdbus call --system --dest net.hadess.PowerProfiles --object-path /net/hadess/PowerProfiles --method org.freedesktop.DBus.Properties.Set 'net.hadess.PowerProfiles' 'ActiveProfile' "<'$1'>"
