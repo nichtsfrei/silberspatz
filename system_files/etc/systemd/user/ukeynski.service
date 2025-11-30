@@ -1,0 +1,14 @@
+[Unit]
+Description=ukeynski
+Documentation=https://github.com/nichtsfrei/onscreenski
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ukeynski
+Restart=on-failure
+RestartSec=5
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Install]
+WantedBy=multi-user.target

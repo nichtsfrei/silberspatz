@@ -17,6 +17,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	flatpak \
 	foot \
 	fuzzel \
+	gtk4-layer-shell \
 	swaylock
 
 # try to get familiar with paperwm instead of tilingshell in bazzite
