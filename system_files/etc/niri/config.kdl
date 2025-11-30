@@ -81,7 +81,7 @@ output "eDP-1" {
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
+    // transform "normal"
 
     // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -209,7 +209,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 spawn-at-startup "waybar"
-// spawn-at-startup "squeekboard"
+
 // Unfortunately this is still needed for some applications
 // spawn-at-startup "xwayland-satellite"
 environment {
