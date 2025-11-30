@@ -1,6 +1,5 @@
 #!/bin/sh
 
-(squeekboard > $XDG_RUNTIME_DIR/osk.log 2>&1 || true) &
 STATE_FILE="$XDG_RUNTIME_DIR/osk_visible_state"
 
 if [ ! -f "$STATE_FILE" ]; then
@@ -10,9 +9,9 @@ fi
 current_state=$(cat "$STATE_FILE")
 
 if [ "$current_state" == "1" ]; then
-    pkill onscreenski
     echo "0" > "$STATE_FILE"
+    pkill onscreenski
 else
-    onscreenski
     echo "1" > "$STATE_FILE"
+    onscreenski
 fi
