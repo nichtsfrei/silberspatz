@@ -38,6 +38,9 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     dnf5 -y copr enable sukhmeet/RyzenAdj && \
     dnf5 install -y ryzenadj && \
     dnf5 -y copr disable sukhmeet/RyzenAdj && \
+    dnf5 -y copr enable hhd-dev/hhd && \
+    dnf5 -y install hhd adjustor hhd-ui && \
+    dnf5 -y copr disable hhd-dev/hhd && \
     /ctx/build.sh && \
     /ctx/finalize
 
