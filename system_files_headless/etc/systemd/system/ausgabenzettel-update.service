@@ -1,0 +1,19 @@
+[Unit]
+Description=PostgreSQL Container
+Wants=passbolt.service
+After=network-online.target
+Requires=network-online.target
+RequiresMountsFor=/run/user/%U/containers
+
+[Service]
+Type=oneshot
+TimeoutStartSec=600
+User=philipp
+Group=philipp
+ExecStart=/usr/bin/podman pull ghcr.io/nichtsfrei/ausgabenzettel:main
+ExecStartPost=/bin/systemctl restart passbolt.service
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

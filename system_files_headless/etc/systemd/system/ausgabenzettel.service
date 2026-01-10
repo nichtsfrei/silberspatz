@@ -1,0 +1,25 @@
+# /etc/systemd/system/postgres.service
+[Unit]
+Description=Start ausgabenzettel Container
+
+[Service]
+Type=simple
+User=philipp
+Group=philipp
+Environment=PODMAN_SYSTEMD_UNIT=%n
+RuntimeDirectory=ausgabenzettel
+RuntimeDirectoryMode=0700
+ExecStartPre=/bin/sh -c '/usr/bin/podman rm -f ausgabenzettel || true'
+ExecStartStart=/usr/bin/podman run --name ausgabenzettel \
+    --rm \
+    -v /etc/ausgabenzettel/server.key:/etc/ausgabenzettel/server.key:Z,ro \
+    -v /etc/ausgabenzettel/server.cer:/etc/ausgabenzettel/server.cer:Z,ro \
+    -v /etc/ausgabenzettel/ca.cer:/etc/ausgabenzettel/ca.cer:Z,ro \
+    -v /var/lib/ausgabenzettel:/var/lib/ausgabenzettel:rw \
+    -p 3000:443 \
+    ghcr.io/nichtsfrei/ausgabenzettel:main
+ExecStop=/usr/bin/podman stop ausgabenzettel
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
