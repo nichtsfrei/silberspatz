@@ -1,6 +1,6 @@
 [Unit]
-Description=PostgreSQL Container
-Wants=passbolt.service
+Description=Ausgabenzettel Container
+Wants=ausgabenzettel.service
 After=network-online.target
 Requires=network-online.target
 RequiresMountsFor=/run/user/%U/containers
@@ -8,12 +8,10 @@ RequiresMountsFor=/run/user/%U/containers
 [Service]
 Type=oneshot
 TimeoutStartSec=600
-User=philipp
-Group=philipp
 ExecStart=/usr/bin/podman pull ghcr.io/nichtsfrei/ausgabenzettel:main
-ExecStartPost=/bin/systemctl restart passbolt.service
+ExecStartPost=/bin/systemctl restart ausgabenzettel.service
 StandardOutput=journal
 StandardError=journal
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
