@@ -20,7 +20,7 @@ FROM ghcr.io/ublue-os/bazzite-deck:stable
 
 COPY system_files/ /
 COPY system_files_desktop/ /
-COPY system_files_deck/ /
+# COPY system_files_deck/ /
 
 COPY --from=kanata /install/ukeynski /usr/local/bin/ukeynski
 COPY --from=kanata /install/onscreenski /usr/local/bin/onscreenski
