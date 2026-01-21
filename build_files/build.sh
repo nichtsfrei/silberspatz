@@ -2,9 +2,6 @@
 
 set -ouex pipefail
 
-dnf5 install -y --setopt=install_weak_deps=False \
-    niri
-
 dnf5 install -y fish tmux neovim distrobox \
 	pam-u2f pamu2fcfg pamtester \
 	setroubleshoot \
