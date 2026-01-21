@@ -16,7 +16,7 @@ RUN apt update && apt install -y \
 RUN cargo build --release
 RUN cp target/release/onscreenski /install/
 
-FROM ghcr.io/ublue-os/bazzite-deck-gnome:stable
+FROM ghcr.io/ublue-os/bazzite-deck-kde:stable
 
 COPY system_files/ /
 COPY system_files_desktop/ /

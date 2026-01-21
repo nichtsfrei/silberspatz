@@ -1,5 +1,5 @@
 # TODO
-- create update script similiar to ujust update
+- Create update script similar to ujust update
 - create timer for system and flatpak updates
 - remove ublue batteries (too many dnf repos for my taste)
 - install nerdfont 
