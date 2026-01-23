@@ -1,8 +1,6 @@
 [Unit]
 Description=Ausgabenzettel Container
 Wants=ausgabenzettel.service
-After=network-online.target
-Requires=network-online.target
 RequiresMountsFor=/run/user/%U/containers
 
 [Service]

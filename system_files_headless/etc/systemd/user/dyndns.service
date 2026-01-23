@@ -1,0 +1,13 @@
+[Unit]
+Description=Make us known to the public
+
+[Service]
+Type=oneshot
+TimeoutStartSec=600
+LoadCredential=dyndns.url:%h/.config/systemd/credentials/dyndns.url
+ExecStart=/usr/bin/curl -fv --config "%d/dyndns.url"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
