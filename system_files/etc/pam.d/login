@@ -1,10 +1,8 @@
 #%PAM-1.0
-auth       include      u2f-sufficient
 auth       substack     system-auth
 auth       include      postlogin
 account    required     pam_nologin.so
 account    include      system-auth
-account    include      u2f-sufficient
 password   include      system-auth
 # pam_selinux.so close should be the first session rule
 session    required     pam_selinux.so close
