@@ -7,7 +7,7 @@ RequiresMountsFor=/run/user/%U/containers
 Type=oneshot
 TimeoutStartSec=600
 ExecStart=/usr/bin/podman pull ghcr.io/nichtsfrei/ausgabenzettel:main
-ExecStartPost=/bin/systemctl restart ausgabenzettel.service
+ExecStartPost=systemctl --user restart --no-block ausgabenzettel.service
 StandardOutput=journal
 StandardError=journal
 
