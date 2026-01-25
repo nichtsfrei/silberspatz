@@ -13,7 +13,7 @@ ExecStart=/usr/bin/podman run --name ausgabenzettel \
     -v /etc/ausgabenzettel/server.key:/etc/ausgabenzettel/server.key:Z,ro \
     -v /etc/ausgabenzettel/server.cer:/etc/ausgabenzettel/server.cer:Z,ro \
     -v /etc/ausgabenzettel/ca.cer:/etc/ausgabenzettel/ca.cer:Z,ro \
-    -v /var/lib/ausgabenzettel:/var/lib/ausgabenzettel:rw \
+    -v /var/lib/ausgabenzettel:/var/lib/ausgabenzettel:Z,rw \
     -e AUSGABENZETTEL_LISTENING="0.0.0.0:3000" \
     -p 3000:3000 \
     ghcr.io/nichtsfrei/ausgabenzettel:main

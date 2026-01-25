@@ -47,7 +47,8 @@
 )
 (defchordsv2
   (z ;)    esc                2 all-released  (nomods)
-  (f j)    ent                2 all-released  (nomods)
+  (f j)    tab                2 all-released  (nomods)
+  (a ;)    ent                2 all-released  (nomods)
   (d h)    bspc               2 all-released  (nomods)
   (d l)    del                2 all-released  (nomods)
 )

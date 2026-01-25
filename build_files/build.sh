@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -ouex pipefail
+groupadd --system uinput
 
 dnf5 install -y fish tmux neovim distrobox \
 	pam-u2f pamu2fcfg pamtester \
