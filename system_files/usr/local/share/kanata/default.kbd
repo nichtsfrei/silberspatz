@@ -11,8 +11,9 @@
   concurrent-tap-hold yes
 )
 (defsrc
-  a   s   d   f   h j   k   l   ;
-  z
+ q w e r t y u i o p 
+ a s d f g h j k l ;
+ z
 )
 (defvar
   ;; Note: consider using different time values for your different fingers.
@@ -33,13 +34,21 @@
   )
 )
 (deflayer base
-  @a  @s  @d  @f  h @j  @k  @l  @;
-  z
+ q w e r t y u i o p 
+ @a @s @d @f g h @j @k @l @;
+ z
 )
 
 (deflayer nomods
-  a   s   d   f   h j   k   l   ;
-  z
+ q w e r t y u i o p 
+ a s d f g h j k l ;
+ z
+)
+
+(deflayer nav
+ q w e r t home pgdn pgup end p 
+ a s d f g left down up right ;
+ z
 )
 
 (deffakekeys
@@ -51,7 +60,9 @@
   (a ;)    ent                2 all-released  (nomods)
   (d h)    bspc               2 all-released  (nomods)
   (d l)    del                2 all-released  (nomods)
+  (s d) (tap-hold 200 200 XX (layer-while-held nav)) 200 first-release ()
 )
+
 (defalias
   tap (multi
     (layer-switch nomods)
