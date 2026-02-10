@@ -22,7 +22,7 @@ RUN cargo build --release
 RUN cp target/release/onscreenski /install/
 
 
-FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
+FROM quay.io/fedora-ostree-desktops/kinoite:${FEDORA_VERSION}
 
 COPY system_files/ /
 COPY system_files_desktop/ /
