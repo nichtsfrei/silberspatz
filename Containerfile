@@ -20,7 +20,19 @@ RUN apt update && apt install -y \
     libgraphene-1.0-dev
 RUN cargo build --release
 RUN cp target/release/onscreenski /install/
-
+RUN apt update && apt install -y \
+     wayland-protocols \
+      clang \
+      libxkbcommon-dev \
+      libwayland-dev \
+      libdbus-1-dev \
+      libpipewire-0.3-dev \
+      libpulse-dev \
+      libudev-dev
+RUN git clone https://github.com/MalpenZibo/ashell.git
+WORKDIR ashell
+RUN cargo build --release
+RUN cp target/release/ashell /install/
 
 FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
 
@@ -30,6 +42,7 @@ COPY system_files_desktop/ /
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
 COPY --from=kanata /install/ukeynski /usr/local/bin/ukeynski
 COPY --from=kanata /install/onscreenski /usr/local/bin/onscreenski
+COPY --from=kanata /install/ashell /usr/local/bin/ashell
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
