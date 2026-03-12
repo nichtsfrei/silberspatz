@@ -1,79 +1,178 @@
-;; Home row mods QWERTY example with more complexity.
-;; Some of the changes from the basic example:
-;; - when a home row mod activates tap, the home row mods are disabled
-;;   while continuing to type rapidly
-;; - tap-hold-release helps make the hold action more responsive
-;; - pressing another key on the same half of the keyboard
-;;   as the home row mod will activate an early tap action
-
 (defcfg
-  process-unmapped-keys yes
-  concurrent-tap-hold yes
+process-unmapped-keys yes
+concurrent-tap-hold yes
 )
+
 (defsrc
- q w e r t y u i o p 
- a s d f g h j k l ;
- z
+q w e r t y u i o p
+a s d f g h j k l ;
+z x c v b n m , . /
+lalt ralt
 )
+
 (defvar
-  ;; Note: consider using different time values for your different fingers.
-  ;; For example, your pinkies might be slower to release keys and index
-  ;; fingers faster.
-  tap-time 200
-  hold-time 150
+tap-time 400
+hold-time 250
 
-  left-hand-keys (
-    q w e r t
-    a s d f g
-    z x c v b
-  )
-  right-hand-keys (
-    y u i o p
-    h j k l ;
-    n m , . /
-  )
+left-hand-keys (
+q w e r t
+a s d f g
+z x c v b
 )
+
+right-hand-keys (
+y u i o p
+h j k l ;
+n m , . /
+)
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Home row mods (chord-safe)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defalias
+a (tap-hold-release-keys $tap-time $hold-time a lmet $right-hand-keys)
+s (tap-hold-release-keys $tap-time $hold-time s lalt $right-hand-keys)
+d (tap-hold-release-keys $tap-time $hold-time d lctl $right-hand-keys)
+f (tap-hold-release-keys $tap-time $hold-time f lsft $right-hand-keys)
+
+j (tap-hold-release-keys $tap-time $hold-time j rsft $left-hand-keys)
+k (tap-hold-release-keys $tap-time $hold-time k rctl $left-hand-keys)
+l (tap-hold-release-keys $tap-time $hold-time l ralt $left-hand-keys)
+; (tap-hold-release-keys $tap-time $hold-time ; rmet $left-hand-keys)
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Base layer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (deflayer base
- q w e r t y u i o p 
- @a @s @d @f g h @j @k @l @;
- z
+q w e r t y u i o p
+@a @s @d @f g h @j @k @l @;
+z x c v b n m , . /
+lalt ralt
 )
 
-(deflayer nomods
- q w e r t y u i o p 
- a s d f g h j k l ;
- z
-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Navigation layer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deflayer nav
- q w e r t home pgdn pgup end p 
- a s d f g left down up right ;
- z
+_ _ _ _ _ home pgdn pgup end _
+_ _ _ _ _ left down up right _
+_ _ _ _ _ _ _ _ _ _
+_ _
 )
 
-(deffakekeys
-  to-base (layer-switch base)
-)
-(defchordsv2
-  (z ;)    esc                2 all-released  (nomods)
-  (f j)    tab                2 all-released  (nomods)
-  (a ;)    ent                2 all-released  (nomods)
-  (d h)    bspc               2 all-released  (nomods)
-  (d l)    del                2 all-released  (nomods)
-  (s d) (tap-hold 200 200 XX (layer-while-held nav)) 200 first-release ()
-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Brackets
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defalias
-  tap (multi
-    (layer-switch nomods)
-    (on-idle-fakekey to-base tap 20)
-  )
-  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
-  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
-  d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
-  f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lsft $left-hand-keys)
-  j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
-  k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
-  l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ; (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+rparen S-0
+lparen S-9
+{ S-[
+} S-]
+- S--
+= S-=
+' S-'
+\ S-\
+` S-`
+)
+
+(deflayer brackets
+@` _ _ _ _ @= @rparen ] @} @-
+` _ _ _ _ = @lparen [ @{ -
+- - - - - _ ' @' \ @\
+_ _
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Numbers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deflayer lnum
+6 7 8 9 0 _ _ _ _ _
+1 2 3 4 5 _ _ _ _ _
+_ _ _ _ _ _ _ _ _ _
+_ _
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Shifted Numbers (Symbols)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defalias
+1 S-1
+2 S-2
+3 S-3
+4 S-4
+5 S-5
+6 S-6
+7 S-7
+8 S-8
+9 S-9
+0 S-0
+)
+
+(deflayer lnum-shift
+@6 @7 @8 @9 @0 _ _ _ _ _
+@1 @2 @3 @4 @5 _ _ _ _ _
+_ _ _ _ _ _ _ _ _ _
+_ _
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Function layer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deflayer lfun
+f6 f7 f8 f9 f10 _ _ _ _ _
+f1 f2 f3 f4 f5 _ _ _ _ _
+f11 f12 _ _ _ _ _ _ _ _
+_ _
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Umlauts
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defalias
+ß (unicode ß)
+ä (unicode ä)
+ü (unicode ü)
+ö (unicode ö)
+)
+
+(deflayer umlaute
+_ _ _ _ _ _ _ _ _ _
+_ _ _ _ _ _ @ß @ä @ü @ö
+_ _ _ _ _ _ _ _ _ _
+_ _
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Chords
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar
+chord-time 40
+)
+
+(defchordsv2
+
+;; editing
+(z ;) esc                $chord-time all-released ()
+(f j) tab                $chord-time all-released ()
+(a ;) ent                $chord-time all-released ()
+(d h) bspc               $chord-time all-released ()
+(d l) del                $chord-time all-released ()
+
+;; layer access
+(a s) (layer-while-held umlaute) $chord-time all-released ()
+(d f) (layer-while-held brackets) $chord-time all-released ()
+(s d) (layer-while-held nav) $chord-time all-released ()
+(j k) (layer-while-held lnum) $chord-time all-released ()
+(k l) (layer-while-held lnum-shift) $chord-time all-released ()
+(l ;) (layer-while-held lfun) $chord-time all-released ()
+
 )

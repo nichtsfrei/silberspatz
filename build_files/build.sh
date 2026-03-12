@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -ouex pipefail
-groupadd --system uinput
 
 dnf5 install -y --setopt=install_weak_deps=False \
     niri
@@ -18,7 +17,6 @@ dnf5 install -y fish tmux neovim distrobox \
 	foot \
 	fuzzel \
 	gtk4-layer-shell \
-	swaylock \
-	waybar
+	swaylock 
 
 dnf5 remove -y firefox nano toolbox
