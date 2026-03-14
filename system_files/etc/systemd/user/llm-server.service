@@ -1,0 +1,18 @@
+[Unit]
+Description=LLM Server using Podman
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/llm-server.sh start
+ExecStop=/usr/local/bin/llm-server.sh stop
+
+Environment=HOME=%h
+Environment=USER=%u
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+
