@@ -4,7 +4,7 @@ Documentation=https://github.com/jtroo/kanata
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/kanata --cfg /usr/local/share/kanata/default.kbd
+ExecStart=/usr/local/bin/kanata-wrapper.sh
 Restart=never
 
 [Install]
