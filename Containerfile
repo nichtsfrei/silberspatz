@@ -37,7 +37,6 @@ RUN cp target/release/ashell /install/
 FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
 
 COPY system_files/ /
-COPY system_files_desktop/ /
 
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
 COPY --from=kanata /install/ukeynski /usr/local/bin/ukeynski
