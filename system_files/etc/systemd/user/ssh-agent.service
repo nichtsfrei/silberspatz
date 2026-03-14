@@ -1,0 +1,11 @@
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=forking
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -a %t/ssh-agent.socket
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
