@@ -34,8 +34,6 @@ jobs:
       matrix:
          container:
           - { path: "Containerfile", tag: "latest" }
-          - { path: "deck.Containerfile", tag: "deck" }
-          - { path: "gaming.Containerfile", tag: "gaming" }
           - { path: "headless.Containerfile", tag: "headless" }
     permissions:
       contents: read
