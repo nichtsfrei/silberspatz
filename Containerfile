@@ -4,22 +4,11 @@ ARG FEDORA_VERSION="${FEDORA_VERSION:-43}"
 FROM scratch AS ctx
 COPY build_files /
 
-#TODO: lookup ublue automount
-# when I don't have my keyboard withme and using a laptop
+# Build kanata and ashell without onscreenski
 FROM rust AS kanata
 RUN cargo install kanata
-RUN git clone https://github.com/nichtsfrei/onscreenski.git
+
 RUN mkdir /install/
-WORKDIR onscreenski/backend
-RUN make
-RUN cp ukeynski /install/
-WORKDIR ../frontend
-RUN apt update && apt install -y \
-    libgtk-4-dev \
-    libgtk4-layer-shell-dev \
-    libgraphene-1.0-dev
-RUN cargo build --release
-RUN cp target/release/onscreenski /install/
 RUN apt update && apt install -y \
      wayland-protocols \
       clang \
@@ -34,13 +23,11 @@ WORKDIR ashell
 RUN cargo build --release
 RUN cp target/release/ashell /install/
 
-FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
+FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
 
 COPY system_files/ /
 
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
-COPY --from=kanata /install/ukeynski /usr/local/bin/ukeynski
-COPY --from=kanata /install/onscreenski /usr/local/bin/onscreenski
 COPY --from=kanata /install/ashell /usr/local/bin/ashell
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
