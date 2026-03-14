@@ -4,7 +4,7 @@
 rpm-ostree update
 flatpak update -y
 distrobox upgrade -a
-llm-server update
+llm-server.sh update
 
 #rpm-ostree db diff --changelogs
 
