@@ -18,7 +18,6 @@ dnf5 install -y fish tmux neovim distrobox \
 	foot \
 	fuzzel \
 	gtk4-layer-shell \
-	swaylock \
-	tlp
+	swaylock
 
 dnf5 remove -y firefox nano toolbox
