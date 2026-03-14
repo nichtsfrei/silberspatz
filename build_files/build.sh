@@ -11,6 +11,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	qemu-kvm \
 	brightnessctl \
 	btop \
+	bat \
 	ripgrep \
 	fzf \
 	flatpak \
