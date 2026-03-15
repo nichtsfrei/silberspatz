@@ -6,6 +6,8 @@ IMAGE_NAME="docker.io/kyuz0/amd-strix-halo-toolboxes:rocm-7.2"
 MODEL_PATH="/models/qwen3-coder-30B-A3B/BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf"
 PORT="8080"
 MODEL_VOLUME="$HOME/models:/models:z"
+NETWORK_NAME="llm"
+
 set -e
 
 # Function to check if container is running
@@ -31,6 +33,7 @@ pull_image() {
 start_container() {
     printf "Starting container with model: %s\n" "$MODEL_PATH"
     
+    podman network create "$NETWORK_NAME" || true
     podman run --rm \
         --name "$CONTAINER_NAME" \
         --device /dev/dri \
@@ -41,6 +44,7 @@ start_container() {
         --cgroupns=host \
         --ulimit memlock=-1 \
         --security-opt seccomp=unconfined \
+        --network "$NETWORK_NAME" \
         -p "$PORT:$PORT" \
         -v "$MODEL_VOLUME" \
         "$IMAGE_NAME" \

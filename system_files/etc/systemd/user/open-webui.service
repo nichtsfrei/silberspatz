@@ -1,0 +1,20 @@
+# /etc/systemd/system/postgres.service
+[Unit]
+Description=Start open-webui Container
+
+[Service]
+Type=simple
+Environment=PODMAN_SYSTEMD_UNIT=%n
+RuntimeDirectory=open-webui
+RuntimeDirectoryMode=0700
+ExecStart=/usr/bin/podman run \
+  --pull always \
+  -p 3000:8080 \
+  -v open-webui:/app/backend/data \
+  --name open-webui \
+  --network llm \
+  ghcr.io/open-webui/open-webui:dev-slim
+ExecStop=/usr/bin/podman stop open-webui
+
+[Install]
+WantedBy=default.target
