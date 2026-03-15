@@ -42,6 +42,7 @@ l (tap-hold-release-keys $tap-time $hold-time l ralt $left-hand-keys)
 ; (tap-hold-release-keys $tap-time $hold-time ; rmet $left-hand-keys)
 space (tap-hold $tap-time $hold-time spc lsft)
 lalt (tap-hold $tap-time $hold-time spc (layer-while-held brackets))
+ralt (tap-hold $tap-time $hold-time enter (layer-while-held umlaute))
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52,7 +53,7 @@ lalt (tap-hold $tap-time $hold-time spc (layer-while-held brackets))
 q w e r t y u i o p
 @a @s @d @f g h @j @k @l @;
 z x c v b n m , . /
-@lalt @space ralt
+@lalt @space @ralt
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -147,8 +148,8 @@ _ _ _
 )
 
 (deflayer umlaute
-_ _ _ _ _ _ _ _ _ _
-_ _ _ _ _ _ @ß @ä @ü @ö
+6 7 8 9 0 _  _  _  _  _ 
+1 2 3 4 5 _ @ß @ä @ü @ö
 _ _ _ _ _ _ _ _ _ _
 _ _ _
 )
