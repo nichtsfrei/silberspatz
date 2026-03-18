@@ -20,6 +20,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	gtk4-layer-shell \
 	tuned \
 	tuned-ppd \
+	ntpd \
 	swaylock
 
-dnf5 remove -y firefox nano toolbox
+dnf5 remove -y firefox nano toolbox 
