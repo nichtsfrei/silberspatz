@@ -7,6 +7,7 @@ COPY build_files /
 # Build kanata and ashell without onscreenski
 FROM rust AS kanata
 RUN cargo install kanata
+RUN cargo install television
 
 RUN mkdir /install/
 RUN apt update && apt install -y \
@@ -28,6 +29,7 @@ FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
 COPY system_files/ /
 
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
+COPY --from=kanata /usr/local/cargo/bin/television /usr/local/bin/television
 COPY --from=kanata /install/ashell /usr/local/bin/ashell
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
