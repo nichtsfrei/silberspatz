@@ -21,6 +21,7 @@ dnf5 install -y fish tmux neovim distrobox \
 	tuned \
 	tuned-ppd \
 	ntpd \
+	cosmic-greeter \
 	swaylock
 
 dnf5 remove -y firefox nano toolbox 

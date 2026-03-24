@@ -29,7 +29,7 @@ FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
 COPY system_files/ /
 
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
-COPY --from=kanata /usr/local/cargo/bin/television /usr/local/bin/television
+COPY --from=kanata /usr/local/cargo/bin/tv /usr/local/bin/tv
 COPY --from=kanata /install/ashell /usr/local/bin/ashell
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
