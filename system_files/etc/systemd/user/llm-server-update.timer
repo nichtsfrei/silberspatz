@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily LLM server update
+
+[Timer]
+OnBootSec=5min-10min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target

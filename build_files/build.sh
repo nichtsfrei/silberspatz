@@ -24,8 +24,4 @@ dnf5 install -y fish tmux neovim distrobox \
 	ntpd \
 	swaylock
 
-dnf5 copr enable -y avengemedia/dms
-dnf5 install -y dms
-dnf5 copr disable -y avengemedia/dms
-
 dnf5 remove -y firefox nano toolbox 

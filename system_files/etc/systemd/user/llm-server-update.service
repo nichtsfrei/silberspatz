@@ -1,0 +1,6 @@
+[Unit]
+Description=Update LLM server
+
+[Service]
+Type=oneshot
+ExecStart=sh -c 'llm-server.sh update'

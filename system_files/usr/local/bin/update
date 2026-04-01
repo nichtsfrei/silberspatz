@@ -2,9 +2,9 @@
 
 # take a look at topgrade
 rpm-ostree update
-flatpak update -y
-distrobox upgrade -a
-llm-server.sh update
+
+command -v flatpak > /dev/null 2>&1 && flatpak update -y
+command -v distrobox > /dev/null 2>&1 && distrobox upgrade -a
 
 #rpm-ostree db diff --changelogs
 
