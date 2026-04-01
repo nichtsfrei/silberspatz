@@ -1,0 +1,12 @@
+#!/bin/sh
+# Start niri-session on tty1 after login
+# This script is called via PAM session hook
+
+# Only run on tty1
+[ "$(tty 2>/dev/null)" = "/dev/tty1" ] || exit 0
+
+# Don't start niri if already running
+pgrep -x niri-session >/dev/null 2>&1 && exit 0
+
+# Replace this process with niri-session
+exec niri-session

@@ -3,7 +3,6 @@
 set -ouex pipefail
 
 dnf5 install -y --setopt=install_weak_deps=False \
-    cosmic-greeter \
     niri
 
 dnf5 install -y fish tmux neovim distrobox \
