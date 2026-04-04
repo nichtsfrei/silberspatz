@@ -13,4 +13,3 @@ session    required     pam_namespace.so
 session    optional     pam_keyinit.so force revoke
 session    include      system-auth
 session    include      postlogin
-session    optional     pam_exec.so /etc/pam.d/postlogin.d/niri-session
