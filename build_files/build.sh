@@ -15,8 +15,9 @@ dnf5 install -y fish tmux neovim distrobox \
 	bat \
 	ripgrep \
 	fzf \
-	flatpak \
 	foot \
+	fd-find \
+	flatpak \
 	fuzzel \
 	gtk4-layer-shell \
 	tuned \
