@@ -25,4 +25,4 @@ dnf5 install -y fish tmux neovim distrobox \
 	ntpd \
 	swaylock
 
-dnf5 remove -y firefox nano toolbox 
+dnf5 remove -y firefox nano toolbox plymouth 
