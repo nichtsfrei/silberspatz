@@ -25,7 +25,8 @@ RUN cargo build --release
 RUN cp target/release/ashell /install/
 RUN cargo install --git https://github.com/itsjunetime/tdf.git
 
-FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
+#FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
+FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
 
 COPY system_files/ /
 
