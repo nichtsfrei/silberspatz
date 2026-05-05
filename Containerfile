@@ -19,10 +19,6 @@ RUN apt update && apt install -y \
       libpipewire-0.3-dev \
       libpulse-dev \
       libudev-dev
-RUN git clone https://github.com/MalpenZibo/ashell.git
-WORKDIR ashell
-RUN cargo build --release
-RUN cp target/release/ashell /install/
 RUN cargo install --git https://github.com/itsjunetime/tdf.git
 
 #FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
@@ -32,7 +28,6 @@ COPY system_files/ /
 
 COPY --from=kanata /usr/local/cargo/bin/kanata /usr/local/bin/kanata
 COPY --from=kanata /usr/local/cargo/bin/tdf /usr/local/bin/tdf
-COPY --from=kanata /install/ashell /usr/local/bin/ashell
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
