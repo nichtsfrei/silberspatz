@@ -2,7 +2,7 @@
 
 set -ouex pipefail
 
-dnf5 install -y fish tmux neovim distrobox \
+dnf5 install -y fish neovim distrobox \
 	NetworkManager-openconnect \
 	pam-u2f pamu2fcfg pamtester \
 	setroubleshoot \
