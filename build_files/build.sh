@@ -15,11 +15,9 @@ dnf5 install -y fish neovim distrobox \
 	foot \
 	fd-find \
 	flatpak \
-	gtk4-layer-shell \
-	mutter-devel \
 	dbus-run-session \
 	tuned \
 	tuned-ppd \
-	ntpd \
+	ntpd 
 
-dnf5 remove -y firefox nano toolbox plymouth evolution ptyxis
+dnf5 remove -y firefox nano toolbox plymouth
