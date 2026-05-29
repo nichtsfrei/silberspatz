@@ -22,8 +22,8 @@ RUN apt update && apt install -y \
 RUN cargo install --git https://github.com/itsjunetime/tdf.git
 
 #FROM quay.io/fedora-ostree-desktops/base-atomic:${FEDORA_VERSION}
-#FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
-FROM quay.io/fedora-ostree-desktops/kinoite:${FEDORA_VERSION}
+FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
+#FROM quay.io/fedora-ostree-desktops/kinoite:${FEDORA_VERSION}
 
 COPY system_files/ /
 
