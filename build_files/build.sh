@@ -18,6 +18,7 @@ dnf5 install -y fish neovim distrobox \
 	dbus-run-session \
 	tuned \
 	tuned-ppd \
+	tmux \
 	ntpd 
 
 dnf5 remove -y firefox nano toolbox plymouth
