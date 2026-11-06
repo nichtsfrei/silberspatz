@@ -21,4 +21,4 @@ dnf5 install -y fish neovim distrobox \
 	tmux \
 	ntpd 
 
-dnf5 remove -y firefox nano toolbox plymouth
+dnf5 remove -y firefox nano toolbox

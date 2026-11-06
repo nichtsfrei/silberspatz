@@ -6,3 +6,4 @@ flatpak install -y flathub com.github.tchx84.Flatseal
 flatpak install -y flathub org.videolan.VLC
 flatpak install -y flathub org.keepassxc.KeePassXC
 flatpak install -y flathub org.pulseaudio.pavucontrol
+flatpak install -y flathub org.mozilla.thunderbird
